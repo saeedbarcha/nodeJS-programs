@@ -1,0 +1,26 @@
+Types of Streams
+In Node, there are four different types of streams:
+Readable streams → To create a stream of data for reading (say, reading a large file in chunks).
+Writable streams → To create a stream of data for writing (say, writing a large amount of data to a file).
+Duplex streams → To create a stream that is both readable and writable at the same time. We can read and write to a duplex stream (say, a socket connection between a client and a server).
+Transform streams → To create a stream that is readable and writable, but the data can be modified while reading and writing to the stream (say, compressing data by the client and server before while requesting).
+Buffers in Streams
+Streams work on a concept called buffer.
+A buffer is a temporary memory that a stream takes to hold some data until it is consumed.
+In a stream, the buffer size is decided by the highWatermark property on the stream instance which is a number denoting the size of the buffer in bytes.
+A buffer memory in Node by default works on String and Buffer. We can also make the buffer memory work on JavaScript objects. To do so, we need to set the property objectMode on the stream object to true.
+If we try to push some data into the stream, the data is pushed into the stream buffer. The pushed data sits in the buffer until the data is consumed.
+If the buffer is full and we try to push data to a stream, the stream does not accept that data and returns with a false value for the push action.
+Streams and EventEmitters
+Streams extend EventEmitters
+Node.js streams extend the EventEmitter class. We can listen to events like data and end in streams.
+To simply listen to an event, we need to use the stream.on() function available in the stream.
+To read more about EventEmitter’s in Node.js, read the following article:
+NodeJs Event Emitters — for beginners and for experts
+Everything you need to know Event Emitters in NodeJs
+medium.com
+
+Read Streams in Node.js
+A stream that is used to read the streaming data is called a read stream. A read stream can be reading a file from a server, or streaming an online video.
+An analogy that I found in many places is to think of a readable stream like a faucet, and the analogy fits perfectly for this stream. The faucet will have water (or, the data) passing through it that is being consumed by someone.
+In this section, we will be creating a read stream from a large text file to see it in action.
